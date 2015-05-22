@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -37,6 +40,7 @@ public class MainActivityFragment extends Fragment {
     private TextView countryCode;
     private TextView latitude;
     private TextView longitude;
+    private TextView longPressMe;
 
     private Button get;
     private Button goToMap;
@@ -69,6 +73,7 @@ public class MainActivityFragment extends Fragment {
         countryCode = (TextView) rootView.findViewById(R.id.country_code);
         latitude = (TextView) rootView.findViewById(R.id.latitude);
         longitude = (TextView) rootView.findViewById(R.id.longitude);
+        longPressMe = (TextView) rootView.findViewById(R.id.long_press_text);
 
         get = (Button) rootView.findViewById(R.id.get);
 
@@ -88,7 +93,33 @@ public class MainActivityFragment extends Fragment {
                 goToMap();
             }
         });
+
+        /*Register long_press_text for context menu*/
+        registerForContextMenu(longPressMe);
+
         return rootView;
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        menu.setHeaderTitle("CM Cool");
+        MenuInflater inflater = getActivity().getMenuInflater();
+        inflater.inflate(R.menu.menu_context, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.cm_get_data:
+                getData();
+                return true;
+
+            case R.id.cm_exit:
+                getActivity().finish();
+                return true;
+        }
+        return super.onContextItemSelected(item);
     }
 
     private void goToMap() {

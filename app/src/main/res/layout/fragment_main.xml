@@ -101,15 +101,22 @@
         android:layout_alignParentStart="true"
         android:id="@+id/linearLayout">
 
-    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Long Press Me"
+        android:id="@+id/long_press_text"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Get Data"
         android:id="@+id/get"
-        android:layout_alignBottom="@+id/linearLayout"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
 
     <Button
         android:layout_width="wrap_content"
@@ -117,6 +124,11 @@
         android:text="Go To Map"
         android:id="@+id/go_to_map"
         android:layout_above="@+id/get"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center_horizontal" />
+
+
+
+    </LinearLayout>
 
 </RelativeLayout>
