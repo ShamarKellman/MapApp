@@ -36,7 +36,7 @@ public class MainActivity extends FragmentActivity {
                 return true;
 
             case R.id.more_data:
-
+                showDialog();
                 return true;
         }
 
