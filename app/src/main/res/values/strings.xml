@@ -4,4 +4,33 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_prefs">PrefsActivity</string>
+
+    <string-array name="color_values">
+        <item>#FFFFFF</item>
+        <item>#FFFF00</item>
+        <item>#FF00FF</item>
+        <item>#FF0000</item>
+        <item>#808080</item>
+        <item>#00FFFF</item>
+        <item>#00FF00</item>
+        <item>#008080</item>
+        <item>#008000</item>
+        <item>#0000FF</item>
+        <item>#000000</item>
+    </string-array>
+
+    <string-array name="color_names">
+        <item>White</item>
+        <item>Yellow</item>
+        <item>Fuchsia</item>
+        <item>Red</item>
+        <item>Gray</item>
+        <item>Aqua</item>
+        <item>Lime</item>
+        <item>Teal</item>
+        <item>Green</item>
+        <item>Blue</item>
+        <item>Black</item>
+    </string-array>
 </resources>

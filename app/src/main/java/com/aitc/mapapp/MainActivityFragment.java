@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ import org.json.JSONObject;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+    private RelativeLayout relativeLayout;
 
     private TextView ipAddress;
     private TextView countryCode;
@@ -64,6 +66,7 @@ public class MainActivityFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        relativeLayout = (RelativeLayout) rootView.findViewById(R.id.frag_root_layout);
 
         progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Getting Data...");
@@ -220,5 +223,9 @@ public class MainActivityFragment extends Fragment {
 
         /* notificationID allows you to update the notification later on. */
         mNotificationManager.notify(notificationID, mBuilder.build());
+    }
+
+    public void setBackgroundColor(int color) {
+       relativeLayout.setBackgroundColor(color);
     }
 }

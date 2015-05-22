@@ -43,6 +43,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.aitc.mapapp.MainActivity" />
         </activity>
+        <activity
+            android:name=".PrefsActivity"
+            android:label="@string/title_activity_prefs" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/cm_get_data" android:title="Go to Data"></item>
+    <item android:id="@+id/cm_get_data" android:title="Get Data"></item>
+    <item android:id="@+id/cm_settings" android:title="Settings"></item>
     <item android:id="@+id/cm_exit" android:title="Exit"></item>
 </menu>
