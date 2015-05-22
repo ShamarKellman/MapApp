@@ -1,9 +1,15 @@
 package com.aitc.mapapp;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +47,10 @@ public class MainActivityFragment extends Fragment {
     Double longitudeData;
 
     private ProgressDialog progressDialog;
+
+    private NotificationManager mNotificationManager;
+    private int notificationID = 100;
+    private int numMessages = 0;
 
     public MainActivityFragment() {
     }
@@ -124,6 +134,7 @@ public class MainActivityFragment extends Fragment {
 
                 }
                 hidepDialog();
+                displayNotification();
             }
         }, new Response.ErrorListener() {
 
@@ -148,5 +159,35 @@ public class MainActivityFragment extends Fragment {
     private void hidepDialog() {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
+    }
+
+    protected void displayNotification() {
+        Log.i("Start", "notification");
+
+         /* Invoking the default notification service */
+        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity());
+        mBuilder.setContentTitle("New Map Info");
+        mBuilder.setContentText("IP: " + ipData + "\nCountry Code: " + countyCodeData);
+        mBuilder.setTicker("New Map Info Alert!!!");
+        mBuilder.setSmallIcon(R.drawable.map);
+
+        /* Increase notification number every time a new notification arrives */
+        mBuilder.setNumber(++numMessages);
+
+        /* Creates an explicit intent for an Activity in your app */
+        Intent resultIntent = new Intent(getActivity(), MapsActivity.class);
+        resultIntent.putExtra("ip", ipData);
+        resultIntent.putExtra("country_code", countyCodeData);
+        resultIntent.putExtra("latitude", latitudeData);
+        resultIntent.putExtra("longitude", longitudeData);
+
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(getActivity(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT );
+
+        mBuilder.setContentIntent(resultPendingIntent);
+
+        mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        /* notificationID allows you to update the notification later on. */
+        mNotificationManager.notify(notificationID, mBuilder.build());
     }
 }
