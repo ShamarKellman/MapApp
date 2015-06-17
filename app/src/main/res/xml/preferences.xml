@@ -12,4 +12,5 @@
         android:defaultValue="#FFFFF"
         android:entries="@array/color_names"
         android:entryValues="@array/color_values" />
+
 </PreferenceScreen>

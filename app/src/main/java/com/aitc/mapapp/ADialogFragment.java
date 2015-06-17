@@ -11,10 +11,11 @@ import android.util.Log;
  * Created by shamar on 5/20/2015.
  */
 public class ADialogFragment extends DialogFragment {
-    public static ADialogFragment newInstance(int title) {
+    public static ADialogFragment newInstance(int title, String message) {
         ADialogFragment frag = new ADialogFragment();
         Bundle args = new Bundle();
         args.putInt("title", title);
+        args.putString("message", message);
         frag.setArguments(args);
         return frag;
     }
@@ -22,9 +23,12 @@ public class ADialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         int title = getArguments().getInt("title");
+        String message  = getArguments().getString("message");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        AlertDialog.Builder builder =
+                new AlertDialog.Builder(getActivity());
         builder.setTitle(title);
+        builder.setMessage(message);
 
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int whichButton) {

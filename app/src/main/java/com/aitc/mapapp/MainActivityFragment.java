@@ -36,6 +36,9 @@ import org.json.JSONObject;
  * A placeholder fragment containing a simple view.
  */
 public class MainActivityFragment extends Fragment {
+
+    private static final int PREFS_RESULT = 1;
+
     private RelativeLayout relativeLayout;
 
     private TextView ipAddress;
@@ -104,9 +107,12 @@ public class MainActivityFragment extends Fragment {
     }
 
     @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+    public void onCreateContextMenu(ContextMenu menu,
+                View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         menu.setHeaderTitle("CM Cool");
+        menu.add(0,v.getId(), 20, "test ITEM");
+
         MenuInflater inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_context, menu);
     }
@@ -120,6 +126,11 @@ public class MainActivityFragment extends Fragment {
 
             case R.id.cm_exit:
                 getActivity().finish();
+                return true;
+
+            case R.id.cm_settings:
+                Intent intent = new Intent(getActivity(), PrefsActivity.class);
+                startActivityForResult(intent, PREFS_RESULT);
                 return true;
         }
         return super.onContextItemSelected(item);
@@ -199,7 +210,8 @@ public class MainActivityFragment extends Fragment {
         Log.i("Start", "notification");
 
          /* Invoking the default notification service */
-        NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getActivity());
+        NotificationCompat.Builder mBuilder =
+                new NotificationCompat.Builder(getActivity());
         mBuilder.setContentTitle("New Map Info");
         mBuilder.setContentText("IP: " + ipData + "\nCountry Code: " + countyCodeData);
         mBuilder.setTicker("New Map Info Alert!!!");
@@ -215,14 +227,18 @@ public class MainActivityFragment extends Fragment {
         resultIntent.putExtra("latitude", latitudeData);
         resultIntent.putExtra("longitude", longitudeData);
 
-        PendingIntent resultPendingIntent = PendingIntent.getActivity(getActivity(), 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT );
+        PendingIntent resultPendingIntent =
+        PendingIntent.getActivity(getActivity(),
+                0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT );
 
         mBuilder.setContentIntent(resultPendingIntent);
 
-        mNotificationManager = (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
+        mNotificationManager =
+                (NotificationManager) getActivity().getSystemService(Context.NOTIFICATION_SERVICE);
 
         /* notificationID allows you to update the notification later on. */
-        mNotificationManager.notify(notificationID, mBuilder.build());
+        mNotificationManager.notify(notificationID,
+                mBuilder.build());
     }
 
     public void setBackgroundColor(int color) {

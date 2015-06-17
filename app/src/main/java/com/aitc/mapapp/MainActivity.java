@@ -61,14 +61,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void showDialog() {
-        ADialogFragment newFragment = ADialogFragment.newInstance(R.string.hello_world);
+        ADialogFragment newFragment =
+                ADialogFragment.newInstance(R.string.hello_world, "This is MY Message");
         newFragment.show(getSupportFragmentManager(), "dialog");
     }
 
     private void changeUI() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPrefs =
+                PreferenceManager.getDefaultSharedPreferences(this);
 
-        MainActivityFragment frag = (MainActivityFragment) getSupportFragmentManager().findFragmentById(R.id.fragment);
+        MainActivityFragment frag =
+                (MainActivityFragment) getSupportFragmentManager()
+                        .findFragmentById(R.id.fragment);
         frag.setBackgroundColor(Color.parseColor(sharedPrefs.getString("color", "#FFFFFF")));
 
         setTitle(sharedPrefs.getString("username", getString(R.string.app_name)));
